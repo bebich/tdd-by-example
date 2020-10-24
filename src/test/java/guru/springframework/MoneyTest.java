@@ -8,33 +8,30 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 public class MoneyTest {
 
     @Test
-    void testMulitplicationDollar() {
-        Dollar five = new Dollar(5);
-        Dollar product = five.times(2);
-        assertEquals(new Dollar(10), product);
-        product = five.times(3);
-        assertEquals(new Dollar(15), product);
+    void testMultiplication() {
+        Money fiveDollars = Money.dollar(5);
+        assertEquals(Money.dollar(10), fiveDollars.times(2));
+        assertEquals(Money.dollar(15), fiveDollars.times(3));
+
+        Money fiveFranc = Money.franc(5);
+        assertEquals(Money.franc(10), fiveFranc.times(2));
+        assertEquals(Money.franc(15), fiveFranc.times(3));
     }
 
     @Test
     void testEqualityDollar() {
-        assertEquals(new Dollar(5), new Dollar(5));
-        assertNotEquals(new Dollar(5), new Dollar(8));
-        assertNotEquals(new Dollar(5), new Franc(5));
+        assertEquals(Money.dollar(5), Money.dollar(5));
+        assertNotEquals(Money.dollar(5), Money.dollar(8));
+        assertNotEquals(Money.dollar(5), Money.franc(5));
+
+        assertEquals(Money.franc(5), Money.franc(5));
+        assertNotEquals(Money.franc(5), Money.franc(8));
+
     }
 
     @Test
-    void testMulitplicationFranc() {
-        Franc five = new Franc(5);
-        Franc product = five.times(2);
-        assertEquals(new Franc(10), product);
-        product = five.times(3);
-        assertEquals(new Franc(15), product);
-    }
-
-    @Test
-    void testEqualityFranc() {
-        assertEquals(new Franc(5), new Franc(5));
-        assertNotEquals(new Franc(5), new Franc(8));
+    void testCurrency(){
+        assertEquals("USD", Money.dollar(1).currency());
+        assertEquals("CHF", Money.franc(1).currency());
     }
 }
